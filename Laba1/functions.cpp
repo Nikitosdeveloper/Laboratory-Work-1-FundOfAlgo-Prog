@@ -124,11 +124,11 @@ extern void printStudents() {
 				printf(" ");
 			}
 			printf(" %s", students[i].inicials);
-			printf("|%d        |", students[i].yearOfBirth);
-			printf("%d           ", students[i].yearOfAdmission);
-			printf("|%2d            |", students[i].studentsRecordBook.physicsMark);
-			printf("%2d                       ", students[i].studentsRecordBook.higherMathMark);
-			printf("|%2d                 |\n", students[i].studentsRecordBook.computerScienceMark);
+			printf("|%-12d|", students[i].yearOfBirth);
+			printf("%-15d", students[i].yearOfAdmission);
+			printf("|%-14d|", students[i].studentsRecordBook.physicsMark);
+			printf("%-25d", students[i].studentsRecordBook.higherMathMark);
+			printf("|%-19d|\n", students[i].studentsRecordBook.computerScienceMark);
 			for (register int i = 0; i < maxLenSurname + 101; i++) {
 				printf("-");
 			}printf("\n");
@@ -173,11 +173,11 @@ extern void printStudentsWhoHasMarksThree() {
 					printf(" ");
 				}
 				printf(" %s", students[i].inicials);
-				printf("|%d        |", students[i].yearOfBirth);
-				printf("%d           ", students[i].yearOfAdmission);
-				printf("|%2d            |", students[i].studentsRecordBook.physicsMark);
-				printf("%2d                       ", students[i].studentsRecordBook.higherMathMark);
-				printf("|%2d                 |\n", students[i].studentsRecordBook.computerScienceMark);
+				printf("|%-12d|", students[i].yearOfBirth);
+				printf("%-15d", students[i].yearOfAdmission);
+				printf("|%-14d|", students[i].studentsRecordBook.physicsMark);
+				printf("%-25d", students[i].studentsRecordBook.higherMathMark);
+				printf("|%-19d|\n", students[i].studentsRecordBook.computerScienceMark);
 				for (register int i = 0; i < maxLenSurname + 101; i++) {
 					printf("-");
 				}printf("\n");
