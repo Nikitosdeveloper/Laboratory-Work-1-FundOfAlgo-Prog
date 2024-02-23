@@ -3,12 +3,12 @@
 static Student* students;
 int countStudents = 0;
 
-void russianAlphabet() {
+extern void russianAlphabet() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 }
 
-void calculateMiddleMark(int studentIndex)
+extern void calculateMiddleMark(int studentIndex)
 {
 	students[studentIndex].studentsRecordBook.middleMark = (double)(
 		students[studentIndex].studentsRecordBook.computerScienceMark +
@@ -99,18 +99,39 @@ extern void printStudents() {
 		printf("Списко студентов пуст\n");
 	}
 	else {
+
+		int maxLenSurname = 7;
 		for (register int i = 0; i < countStudents; i++) {
-			printf("\n\n");
-			printf("Студент #%d\n", i + 1);
-			printf("Фамилия студента: ");
-			puts(students[i].surname);
-			printf("Инициалы студента: ");
-			puts(students[i].inicials);
-			printf("Год рождения студента: %d\n", students[i].yearOfBirth);
-			printf("Год поступления студента в БГУИР: %d\n", students[i].yearOfAdmission);
-			printf("Оценка стундента за физику: %d\n", students[i].studentsRecordBook.physicsMark);
-			printf("Оценка студента за высшую математику: %d\n", students[i].studentsRecordBook.higherMathMark);
-			printf("Оценка студента за информатику: %d\n", students[i].studentsRecordBook.computerScienceMark);
+			maxLenSurname = strlen(students[i].surname) > maxLenSurname ? 
+				strlen(students[i].surname) : maxLenSurname;
+		}
+
+		for (register int i = 0; i < maxLenSurname + 101; i++) {
+			printf("-");
+		}
+		printf("\n|  №|Фамилия");
+		for (register int i = 0; i < maxLenSurname + 5 - 7; i++) {
+			printf(" ");
+		}
+		printf("|Год рождения|Год поступления|Отметка Физика|Отметка высшая математика|Отметка информатика|\n");
+		for (register int i = 0; i < maxLenSurname + 101; i++) {
+			printf("-");
+		}printf("\n");
+		for (register int i = 0; i < countStudents; i++) {
+			printf("|%3d|", i + 1);
+			printf("%s",students[i].surname);
+			for (register int j = 0; j < maxLenSurname - strlen(students[i].surname); j++) {
+				printf(" ");
+			}
+			printf(" %s", students[i].inicials);
+			printf("|%d        |", students[i].yearOfBirth);
+			printf("%d           ", students[i].yearOfAdmission);
+			printf("|%2d            |", students[i].studentsRecordBook.physicsMark);
+			printf("%2d                       ", students[i].studentsRecordBook.higherMathMark);
+			printf("|%2d                 |\n", students[i].studentsRecordBook.computerScienceMark);
+			for (register int i = 0; i < maxLenSurname + 101; i++) {
+				printf("-");
+			}printf("\n");
 		}
 	}
 }
@@ -122,21 +143,44 @@ extern void printStudentsWhoHasMarksThree() {
 	}
 	else {
 		bool isHaventStudentsWhoWhasThree = true;
+		int maxLenSurname = 7;
+		for (register int i = 0; i < countStudents; i++) {
+			maxLenSurname = strlen(students[i].surname) > maxLenSurname && 
+				(students[i].studentsRecordBook.computerScienceMark == 3 ||
+				students[i].studentsRecordBook.physicsMark == 3 ||
+				students[i].studentsRecordBook.higherMathMark == 3) ?
+				strlen(students[i].surname) : maxLenSurname;
+		}
+
+		for (register int i = 0; i < maxLenSurname + 101; i++) {
+			printf("-");
+		}
+		printf("\n|  №|Фамилия");
+		for (register int i = 0; i < maxLenSurname + 5 - 7; i++) {
+			printf(" ");
+		}
+		printf("|Год рождения|Год поступления|Отметка Физика|Отметка высшая математика|Отметка информатика|\n");
+		for (register int i = 0; i < maxLenSurname + 101; i++) {
+			printf("-");
+		}printf("\n");
 		for (register int i = 0; i < countStudents; i++) {
 			if (students[i].studentsRecordBook.computerScienceMark == 3 ||
 				students[i].studentsRecordBook.physicsMark == 3 ||
 				students[i].studentsRecordBook.higherMathMark == 3) {
-				printf("\n\n");
-				printf("Студент #%d\n", i + 1);
-				printf("Фамилия студента: ");
-				puts(students[i].surname);
-				printf("Инициалы студента: ");
-				puts(students[i].inicials);
-				printf("Год рождения студента: %d\n", students[i].yearOfBirth);
-				printf("Год поступления студента в БГУИР: %d\n", students[i].yearOfAdmission);
-				printf("Оценка стундента за физику: %d\n", students[i].studentsRecordBook.physicsMark);
-				printf("Оценка студента за высшую математику: %d\n", students[i].studentsRecordBook.higherMathMark);
-				printf("Оценка студента за информатику: %d\n", students[i].studentsRecordBook.computerScienceMark);
+				printf("|%3d|", i + 1);
+				printf("%s", students[i].surname);
+				for (register int j = 0; j < maxLenSurname - strlen(students[i].surname); j++) {
+					printf(" ");
+				}
+				printf(" %s", students[i].inicials);
+				printf("|%d        |", students[i].yearOfBirth);
+				printf("%d           ", students[i].yearOfAdmission);
+				printf("|%2d            |", students[i].studentsRecordBook.physicsMark);
+				printf("%2d                       ", students[i].studentsRecordBook.higherMathMark);
+				printf("|%2d                 |\n", students[i].studentsRecordBook.computerScienceMark);
+				for (register int i = 0; i < maxLenSurname + 101; i++) {
+					printf("-");
+				}printf("\n");
 				isHaventStudentsWhoWhasThree = false;
 			}
 		}
@@ -249,8 +293,8 @@ extern void deleteStudent() {
 
 		} while (index == 0);
 		index--;
-		for (register int i = countStudents - 1; i > index; i--) {
-			students[i - 1] = students[i];
+		for (register int i = index; i < countStudents-1; i++) {
+			students[i] = students[i+1];
 		}
 		countStudents--;
 		allocationMemory();
@@ -285,7 +329,7 @@ extern void sortStudent() {
 			isSwap = false;
 			for (register int i = 0; i < countStudents - 1 - k; i++) {
 				if (options == 1 && strcmp(students[i].surname, students[i + 1].surname) > 0 ||
-					options == 2 && students[i].studentsRecordBook.middleMark > students[i + 1].studentsRecordBook.middleMark) {
+					options == 2 && students[i].studentsRecordBook.middleMark < students[i + 1].studentsRecordBook.middleMark) {
 					Student temp = students[i];
 					students[i] = students[i + 1];
 					students[i + 1] = temp;
