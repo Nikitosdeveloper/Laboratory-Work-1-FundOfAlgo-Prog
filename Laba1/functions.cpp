@@ -216,7 +216,6 @@ void updateStudent()
 			printf("4 - год поступления в БГУИР\n");
 			printf("5 - оценку в зачётке\n");
 			printf("Параметр для изменения: ");
-			//scanf_s("%d", &options);
 			options = inputIntOptions();
 			switch (options)
 			{
@@ -246,7 +245,6 @@ void updateStudent()
 					printf("2 - высшая математика\n");
 					printf("3 - информатика\n");
 					printf("Номер дисциплины: ");
-					//scanf_s("%d", &disciplineIndex);
 					disciplineIndex = inputIntOptions();
 					switch (disciplineIndex)
 					{
